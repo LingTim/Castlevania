@@ -9,14 +9,14 @@ public class character_move : MonoBehaviour
     public bool can_attack = true;
 
     private float moving_speed = 5.0f;
-    private float jumpForce = 150.0f;
+    public float jumpForce = 150.0f;
     public float y_speed;
 
     public int max_hold_time = 10;
     public int hold_counter = 0;
     public int step = 0;
     public int atk = 10;
-    public int life = 200;
+    public int life = 100;
 
     public Animator ani;
 
@@ -32,11 +32,11 @@ public class character_move : MonoBehaviour
     {
         y_speed = GetComponent<Rigidbody2D>().velocity.y;
 
-        if (Input.GetKeyDown(KeyCode.Space) && jump && step == 0)
+        if (Input.GetKeyDown(KeyCode.Space) && jump && step == 0 && is_ground)
         {
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0.0f, jumpForce / Time.deltaTime / 100.0f));
+            print("jump");
             ani.SetBool("∏ı≈Dº∆≠»", true);
-            print(hold_counter);
         }
 
         if (Input.GetKeyUp(KeyCode.Space) && !is_ground)
@@ -50,11 +50,7 @@ public class character_move : MonoBehaviour
             hold_counter = 0;
         }
 
-        if (y_speed != 0)
-            is_ground = false;
-
         attack();
-
     }
 
     void FixedUpdate()
@@ -76,7 +72,11 @@ public class character_move : MonoBehaviour
             }
 
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0.0f, jumpForce / Time.deltaTime / 100.0f));
+            print("jump");
         }
+
+        if (y_speed != 0)
+            is_ground = false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

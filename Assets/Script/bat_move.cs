@@ -15,7 +15,7 @@ public class bat_move : MonoBehaviour
 
     private void Start()
     {
-        ani.GetComponent<Animator>();
+        ani = GetComponent<Animator>();
     }
 
     private void FixedUpdate()

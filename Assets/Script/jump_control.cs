@@ -12,4 +12,9 @@ public class jump_control : MonoBehaviour
         chara.ani.SetBool("∏ı≈Dº∆≠»", false);
         
     }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        chara.is_ground = true;
+    }
 }
