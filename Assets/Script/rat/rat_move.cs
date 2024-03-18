@@ -59,7 +59,6 @@ public class rat_move : MonoBehaviour
     public void be_damaged()
     {
         life -= 10;
-        print(life);
         if(life > 0)
         {
             ani.SetBool("¨ü¶Ë¼Æ­È", true);

@@ -6,6 +6,13 @@ TagManager:
   tags:
   - ground
   - villain
+  - trigger
+  - active
+  - void
+  - gate
+  - elevator
+  - switch
+  - bridge
   layers:
   - Default
   - TransparentFX
