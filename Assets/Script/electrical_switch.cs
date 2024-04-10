@@ -4,8 +4,9 @@ public class electrical_switch : MonoBehaviour
 {
     private bool can_use = false;
     private bool active = false;
+    public bool electricity = false;
 
-    private GameObject[] elevators;
+    public GameObject damaged_wall;
 
     public Sprite full_charge;
 
@@ -13,17 +14,11 @@ public class electrical_switch : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.F) && can_use && !active)
         {
-            elevators = GameObject.FindGameObjectsWithTag("elevator");
-
-            foreach(GameObject e in elevators)
-            {
-                e.GetComponent<elevator>().electricity = true;
-            }
-
             active = true;
             interact_text_control.instance.text_down();
-
+            electricity = true;
             gameObject.GetComponent<SpriteRenderer>().sprite = full_charge;
+            damaged_wall.SetActive(true);
         }
     }
 

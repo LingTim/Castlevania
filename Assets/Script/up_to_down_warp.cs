@@ -8,7 +8,7 @@ public class up_to_down_warp : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
-            warp_control.instance.warp(teleport_position, collision.gameObject);
+            warp_control.instance.warp(teleport_position, collision.gameObject, true);
         }
     }
 }

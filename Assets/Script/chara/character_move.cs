@@ -4,14 +4,15 @@ using System.Collections;
 public class character_move : MonoBehaviour
 {
     private bool facingRight = false;
-    public bool jump = true;
-    public bool is_ground = true;
+    private bool jumping = false;
     public bool can_attack = true;
     public bool attacking = false;
     public bool is_beat_back = false;//琌タ砆阑癶
+    private bool is_invincible = false; 
 
-    private float moving_speed = 5.0f;
-    public float jumpForce = 100.0f;
+    private float moving_speed = 6.0f;
+    public float jump_force = 550.0f;
+    public float jump_continued_force = 55.0f;
     private float y_speed;
 
     private int max_hold_time = 10;
@@ -19,40 +20,31 @@ public class character_move : MonoBehaviour
     public int life = 70;
 
     public Animator ani;
+    private Rigidbody2D rig;
 
     private Collider2D attack_block;
 
     private void Start()
     {
         ani = gameObject.GetComponent<Animator>();
-        attack_block = transform.GetChild(1).GetComponent<Collider2D>();
-
+        rig = gameObject.GetComponent<Rigidbody2D>();
+        attack_block = transform.GetChild(0).GetComponent<Collider2D>();
+        bloodUI_control.instance.bloodUI_change(life);
     }
 
     void Update()
     {
-        y_speed = GetComponent<Rigidbody2D>().velocity.y;
+        y_speed = rig.velocity.y;
 
-        if (Input.GetKeyDown(KeyCode.Space) && jump && is_ground && !is_beat_back)
-        {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0.0f, jumpForce));
-            is_ground = false;
-            ani.SetBool("铬臘计", true);
-            StartCoroutine(jump_end());
-        }
-
-        if (Input.GetKeyUp(KeyCode.Space) && !is_ground)
-        {
-            jump = false;
-            hold_counter = 0;
-        }
-        else if (Input.GetKeyUp(KeyCode.Space) && is_ground)
-        {
-            jump = true;
-            hold_counter = 0;
-        }
+        jump();
 
         attack();
+    }
+
+    private void LateUpdate()
+    {
+        if (y_speed == 0 && ani.GetBool("铬臘计"))
+            ani.SetBool("铬臘计", true);
     }
 
     void FixedUpdate()
@@ -66,33 +58,46 @@ public class character_move : MonoBehaviour
         if ((h < 0 && facingRight || h > 0 && !facingRight) && !is_beat_back)
             Flip();
 
-        if (Input.GetKey(KeyCode.Space) && jump && !is_ground)
-        {
-            hold_counter++;
-            if (hold_counter >= max_hold_time)
-            {
-                jump = false;
-            }
-
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0.0f, jumpForce));
-        }
-
-        if (y_speed != 0)
-            is_ground = false;
+        jump_continued();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.tag == "villain" && !is_beat_back)
+        if (collision.transform.tag == "villain" && !is_invincible)
         {
-            is_beat_back = true;
             injury();
+            beat_back(transform.position.x, collision.transform.position.x);
+        }
+        else if(collision.transform.tag == "fall")
+        {
+            injury();
+        }
+    }
 
-            //阑癶
-            if (life > 0)
-            {
-                beat_back(transform.position.x, collision.transform.position.x);
-            }
+    private void jump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && y_speed == 0 && !jumping)
+        {
+            ani.SetBool("铬臘计", true);
+            StartCoroutine(jump_end());
+            rig.AddForce(new Vector2(0.0f, jump_force));
+            jumping = true;
+        }
+        else if (Input.GetKeyUp(KeyCode.Space))
+        {
+            hold_counter = 0;
+            jumping = false;
+        }
+    }
+
+    private void jump_continued()
+    {
+        if (Input.GetKey(KeyCode.Space) && hold_counter < max_hold_time && jumping)
+        {
+            hold_counter++;
+            rig.AddForce(new Vector2(0.0f, jump_continued_force));
+            //if (hold_counter == 10)
+            //print("y_speed:" + y_speed + ", y:" + gameObject.transform.position.y);
         }
     }
 
@@ -117,18 +122,20 @@ public class character_move : MonoBehaviour
         else
         {
             ani.SetBool("端计", true);
+            StartCoroutine(invincible());
             StartCoroutine(damage_end());
         }
     }
 
     public void beat_back(float player_x, float collision_x)
     {
-        Vector2 power = new Vector2(1.0f, 0.8f);
+        is_beat_back = true;
+        Vector2 power = new Vector2(0.6f, 0.6f);
 
         if (player_x < collision_x)
             power.x *= -1;
 
-        GetComponent<Rigidbody2D>().AddForce(power * 400.0f);
+        rig.AddForce(power * 400.0f);
     }
 
     private void attack()
@@ -145,9 +152,9 @@ public class character_move : MonoBehaviour
         //铬ю
         if (Input.GetKeyDown(KeyCode.J) && ani.GetBool("铬臘计") && can_attack)
         {
-            can_attack = false;
             ani.SetBool("ю阑计", true);
             StartCoroutine(jump_attack_end());
+            can_attack = false;
             attacking = true;
         }
     }
@@ -195,6 +202,7 @@ public class character_move : MonoBehaviour
     private IEnumerator death_end()
     {
         yield return new WaitForSeconds(1.25f);
+        bloodUI_control.instance.death_canvas_appear();
         Destroy(gameObject);
     }
 
@@ -202,5 +210,14 @@ public class character_move : MonoBehaviour
     {
         yield return new WaitForSeconds(0.2f);
         can_attack = true;
+    }
+
+    private IEnumerator invincible()
+    {
+        is_invincible = true;
+        gameObject.layer = LayerMask.NameToLayer("invincible");
+        yield return new WaitForSeconds(2.0f);
+        is_invincible = false;
+        gameObject.layer = LayerMask.NameToLayer("Default");
     }
 }

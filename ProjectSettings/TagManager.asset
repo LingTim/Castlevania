@@ -8,21 +8,21 @@ TagManager:
   - villain
   - trigger
   - active
-  - void
   - gate
   - elevator
   - switch
   - bridge
+  - fall
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - villain
   - Water
   - UI
-  - 
-  - 
-  - 
+  - bullet
+  - trigger
+  - invincible
   - 
   - 
   - 

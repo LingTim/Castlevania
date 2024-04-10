@@ -9,16 +9,11 @@ public class gate : MonoBehaviour
 
     private GameObject teleport_obj;
 
-    private void Start()
-    {
-
-    }
-
     private void Update()
     {
         if (can_teleport && Input.GetKeyDown(KeyCode.F))
         {
-            warp_control.instance.warp(teleport_position, teleport_obj);
+            warp_control.instance.warp(teleport_position, teleport_obj, true);
         }
     }
 

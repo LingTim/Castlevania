@@ -15,9 +15,12 @@ public class rat_move : MonoBehaviour
 
     public Animator ani;
 
+    private character_move chara;
+
     private void Start()
     {
         ani = GetComponent<Animator>();
+        chara = GameObject.Find("еDид").GetComponent<character_move>();
 
         if (transform.localScale.x < 0)
             dir.x *= -1;

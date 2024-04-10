@@ -9,7 +9,7 @@ public class void_damage : MonoBehaviour
         if(collision.tag == "Player")
         {
             collision.GetComponent<character_move>().injury();
-            warp_control.instance.warp(teleport_position, collision.gameObject);
+            warp_control.instance.warp(teleport_position, collision.gameObject, false);
         }
     }
 }

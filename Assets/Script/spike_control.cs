@@ -26,13 +26,12 @@ public class spike_control : MonoBehaviour
             pos = new Vector3(7.5f, 4.275f, 0.0f);
         }
 
-        chara.injury();
         if (chara.life > 0)
             Invoke("warp_delay", 0.417f);
     }
 
     private void warp_delay()
     {
-        warp_control.instance.warp(pos, warp_obj);
+        warp_control.instance.warp(pos, warp_obj, false);
     }
 }

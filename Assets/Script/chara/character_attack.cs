@@ -21,6 +21,11 @@ public class character_attack : MonoBehaviour
                 failman_move failman = collision.GetComponent<failman_move>();
                 failman.be_damaged();
             }
+            else if (collision.name == "¼Ú®R")
+            {
+                ona_move failman = collision.GetComponent<ona_move>();
+                failman.be_damaged();
+            }
         }
     }
 }
