@@ -23,11 +23,13 @@ public class character_move : MonoBehaviour
     private Rigidbody2D rig;
 
     private Collider2D attack_block;
+    private Collider2D col;
 
     private void Start()
     {
-        ani = gameObject.GetComponent<Animator>();
-        rig = gameObject.GetComponent<Rigidbody2D>();
+        ani = GetComponent<Animator>();
+        rig = GetComponent<Rigidbody2D>();
+        col = GetComponent<Collider2D>();
         attack_block = transform.GetChild(0).GetComponent<Collider2D>();
         bloodUI_control.instance.bloodUI_change(life);
     }
@@ -65,12 +67,15 @@ public class character_move : MonoBehaviour
     {
         if (collision.transform.tag == "villain" && !is_invincible)
         {
-            injury();
+            if(collision.transform.name == "超大光束(Clone)")
+                injury(20);
+            else
+                injury(10);
             beat_back(transform.position.x, collision.transform.position.x);
         }
         else if(collision.transform.tag == "fall")
         {
-            injury();
+            injury(10);
         }
     }
 
@@ -109,9 +114,9 @@ public class character_move : MonoBehaviour
         transform.localScale = characterScale;
     }
 
-    public void injury()
+    public void injury(int damage)
     {
-        life -= 10;
+        life -= damage;
         bloodUI_control.instance.bloodUI_change(life);
 
         if (life <= 0)
@@ -124,6 +129,7 @@ public class character_move : MonoBehaviour
             ani.SetBool("受傷數值", true);
             StartCoroutine(invincible());
             StartCoroutine(damage_end());
+            col.enabled = false;
         }
     }
 

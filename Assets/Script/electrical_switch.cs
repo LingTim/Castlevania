@@ -3,11 +3,12 @@ using UnityEngine;
 public class electrical_switch : MonoBehaviour
 {
     private bool can_use = false;
-    private bool active = false;
+    public bool active = false;
     public bool electricity = false;
 
     public GameObject damaged_wall;
 
+    public Sprite no_charge;
     public Sprite full_charge;
 
     private void Update()
@@ -26,7 +27,7 @@ public class electrical_switch : MonoBehaviour
     {
         if(collision.tag == "Player" && !active)
         {
-            interact_text_control.instance.text_on();
+            interact_text_control.instance.text_on("按下F打開開關");
             can_use = true;
         }    
     }

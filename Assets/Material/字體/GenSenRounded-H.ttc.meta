@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: f54ae9fb1c75cd24bb72e0c8885ae30f
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - GenSenRounded TW
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 41d56a54f0ffbce41a0dd7438864caaf, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

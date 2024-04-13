@@ -15,9 +15,10 @@ public class interact_text_control : MonoBehaviour
         text = GameObject.Find("¤¬°Ê¤å¦r").GetComponent<TextMeshProUGUI>();
     }
 
-    public void text_on()
+    public void text_on(string label)
     {
         text.enabled = true;
+        text.text = label;
     }
 
     public void text_down()

@@ -22,7 +22,7 @@ public class bloodUI_control : MonoBehaviour
     public Sprite[] head_image;
     public Sprite[] prologue_image;
 
-    public Canvas death_canvas;
+    public GameObject death_canvas;
 
     private void Awake()
     {
@@ -72,7 +72,7 @@ public class bloodUI_control : MonoBehaviour
 
     public void death_canvas_appear()
     {
-        death_canvas.enabled = true;
+        death_canvas.SetActive(true);
     }
 
     public void load_intro()

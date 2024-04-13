@@ -13,7 +13,6 @@ public class teleport_anime : MonoBehaviour
     private void Start()
     {
         screen = gameObject.GetComponent<Image>();
-        chara_rigid_body = GameObject.Find("еDид").GetComponent<Rigidbody2D>();
     }
 
     public void test()
@@ -23,6 +22,7 @@ public class teleport_anime : MonoBehaviour
 
     public IEnumerator screen_anime()
     {
+        chara_rigid_body = GameObject.Find("еDид").GetComponent<Rigidbody2D>();
         chara_rigid_body.gravityScale = 0;
         chara_rigid_body.velocity = new Vector2(chara_rigid_body.velocity.x, 0);
         for(int i = 0;i < screens.Length;i++)

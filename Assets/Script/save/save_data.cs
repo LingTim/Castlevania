@@ -23,6 +23,6 @@ public class save_data : MonoBehaviour
     public bool eletricity = false;
     public bool eletricity_room_wall = false;
     public bool damaged_bridge = true;
-    public bool boss_front_door = false;
+    public bool boss_front_door = true;
     public bool boss_back_door = true;
 }

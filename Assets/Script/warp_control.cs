@@ -30,6 +30,9 @@ public class warp_control : MonoBehaviour
         {
             cnt++;
         }
+
+        if(cma_ctrl == null && GameObject.Find("攝影機高度維持區域偵測器"))
+            cma_ctrl = GameObject.Find("攝影機高度維持區域偵測器").GetComponent<camera_control>();
     }
 
     public void warp(Vector3 pos, GameObject obj, bool anime)

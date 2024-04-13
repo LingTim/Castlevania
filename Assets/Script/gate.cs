@@ -23,7 +23,7 @@ public class gate : MonoBehaviour
         {
             can_teleport = true;
             teleport_obj = collision.gameObject;
-            interact_text_control.instance.text_on();
+            interact_text_control.instance.text_on("«ö¤UF¶i¤J");
         }
     }
 

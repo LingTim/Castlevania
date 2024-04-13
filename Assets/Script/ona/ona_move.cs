@@ -21,7 +21,7 @@ public class ona_move : MonoBehaviour
 
     public Animator ani;
 
-    private character_move chara;
+    public character_move chara;
 
     private Rigidbody2D rig;
 
@@ -47,7 +47,7 @@ public class ona_move : MonoBehaviour
         ani = gameObject.GetComponent<Animator>();
         rig = gameObject.GetComponent<Rigidbody2D>();
         col = gameObject.GetComponent<Collider2D>();
-        chara = GameObject.Find("еDид").GetComponent<character_move>();
+        
     }
 
     private void FixedUpdate()

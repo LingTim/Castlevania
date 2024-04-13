@@ -8,8 +8,16 @@ public class void_damage : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
-            collision.GetComponent<character_move>().injury();
-            warp_control.instance.warp(teleport_position, collision.gameObject, false);
+            collision.GetComponent<character_move>().injury(10);
+            if(collision.GetComponent<character_move>().life > 0)
+            {
+                warp_control.instance.warp(teleport_position, collision.gameObject, false);
+            }
+            else
+            {
+                collision.GetComponent<Rigidbody2D>().gravityScale = 0;
+                collision.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            }
         }
     }
 }

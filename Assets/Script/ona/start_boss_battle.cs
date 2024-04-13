@@ -2,24 +2,28 @@ using UnityEngine;
 
 public class start_boss_battle : MonoBehaviour
 {
-    private bool is_activate = false;
+    public bool is_activate = false;
 
-    private ona_move ona;
+    public ona_move ona;
 
-    public GameObject door;
+    public GameObject front_door;
 
     private void Start()
     {
-        ona = GameObject.Find("歐娜").GetComponent<ona_move>();
+        front_door = GameObject.Find("BOSS戰升起的門");
+        front_door.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(!is_activate)
         {
+            ona = GameObject.Find("歐娜").GetComponent<ona_move>();
             ona.ona_activate();
+            ona.chara = GameObject.Find("主角").GetComponent<character_move>();
+            ona.door = GameObject.Find("BOSS戰結束降下的門");
             is_activate = true;
-            door.SetActive(true);
+            front_door.SetActive(true);
         }
     }
 }

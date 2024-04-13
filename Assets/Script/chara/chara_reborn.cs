@@ -2,11 +2,15 @@ using UnityEngine;
 
 public class chara_reborn : MonoBehaviour
 {
+    private Camera cma;
+
     public GameObject chara_prefab;
 
     private save_data SD;
 
-    public Canvas death_canvas;
+    private camera_control cma_ctrl;
+
+    public GameObject death_canvas;
 
     void Start()
     {
@@ -15,7 +19,15 @@ public class chara_reborn : MonoBehaviour
 
     public void born_chara()
     {
-        Instantiate(chara_prefab, SD.reborn_point, Quaternion.identity);
-        death_canvas.enabled = false;
+        GameObject token = Instantiate(chara_prefab, SD.reborn_point, Quaternion.identity);
+        token.name = chara_prefab.name;
+
+        cma = GameObject.Find("攝影機").GetComponent<Camera>();
+        cma_ctrl = GameObject.Find("攝影機高度維持區域偵測器").GetComponent<camera_control>();
+        cma.transform.position = new Vector3(SD.reborn_point.x, SD.reborn_point.y, -8.0f);
+        cma_ctrl.y_new = cma.transform.position.y;//同步camera_control這個腳本的參數
+
+        generate_controller.instance.generate();
+        death_canvas.SetActive(false);
     }
 }

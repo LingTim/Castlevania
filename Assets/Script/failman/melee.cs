@@ -14,7 +14,7 @@ public class melee : MonoBehaviour
 
         if(collision.tag == "Player")
         {
-            chara.injury();
+            chara.injury(10);
             chara.beat_back(chara.transform.position.x, transform.parent.position.x);
         }
     }

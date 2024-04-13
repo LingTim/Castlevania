@@ -17,9 +17,15 @@ public class rat_move : MonoBehaviour
 
     private character_move chara;
 
+    private Collider2D col;
+
+    private Rigidbody2D rig;
+
     private void Start()
     {
         ani = GetComponent<Animator>();
+        col = GetComponent<Collider2D>();
+        rig = GetComponent<Rigidbody2D>();
         chara = GameObject.Find("¥D¨¤").GetComponent<character_move>();
 
         if (transform.localScale.x < 0)
@@ -69,6 +75,8 @@ public class rat_move : MonoBehaviour
         else
         {
             ani.SetBool("¦º¤`¼Æ­È", true);
+            col.enabled = false;
+            rig.gravityScale = 0;
         }
     }
 
