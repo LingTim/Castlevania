@@ -146,6 +146,7 @@ MonoBehaviour:
   is_activate: 0
   ona: {fileID: 0}
   front_door: {fileID: 0}
+  boss_bgm: {fileID: 8300000, guid: 6c2e4390312caaa48b336d03da787f88, type: 3}
 --- !u!1 &694972131874129331
 GameObject:
   m_ObjectHideFlags: 0
@@ -1249,7 +1250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a957f51f2b2f9f941bd0c9ff7b601be3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  life: 160
+  life: 190
   shell_direction:
   - {x: -0.258, y: -0.965}
   - {x: 0, y: -1}

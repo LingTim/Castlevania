@@ -8,6 +8,8 @@ public class start_boss_battle : MonoBehaviour
 
     public GameObject front_door;
 
+    public AudioClip boss_bgm;
+
     private void Start()
     {
         front_door = GameObject.Find("BOSS戰升起的門");
@@ -24,6 +26,13 @@ public class start_boss_battle : MonoBehaviour
             ona.door = GameObject.Find("BOSS戰結束降下的門");
             is_activate = true;
             front_door.SetActive(true);
+
+            GameObject.Find("歐娜頭像背景").GetComponent<CanvasGroup>().alpha = 1.0f;
+            GameObject.Find("歐娜血條").GetComponent<CanvasGroup>().alpha = 1.0f;
+            GameObject.Find("BGM").GetComponent<AudioSource>().clip = boss_bgm;
+            GameObject.Find("BGM").GetComponent<AudioSource>().Play();
+
+            bloodUI_control.instance.ona_bloodUI_change(190);
         }
     }
 }

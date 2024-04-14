@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class bat_move : MonoBehaviour
 {
-    private Vector2 dir = new Vector2(1.0f, 0.0f);
+    public Vector2 dir = new Vector2(1.0f, 0.0f);
 
     private int life = 10;
     private int fly_counter = 0;
@@ -10,6 +10,7 @@ public class bat_move : MonoBehaviour
     private float v_force = 15f;
 
     public bool dive = false;
+    private bool reverse = false;
 
     private Animator ani;
 
@@ -17,11 +18,19 @@ public class bat_move : MonoBehaviour
     {
         ani = GetComponent<Animator>();
         Destroy(gameObject, 20.0f);
+        if (gameObject.transform.parent.transform.localScale.x < 0)
+        {
+            dir *= -1;
+            reverse = true;
+        }
     }
 
     private void FixedUpdate()
     {
-        transform.Translate(dir / 6.0f);
+        if(!reverse)
+            transform.Translate(dir / 6.0f);
+        else
+            transform.Translate(dir / 6.0f * -1);
 
         if (dive)
         {

@@ -34,7 +34,7 @@ public class electrical_switch : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "Player" && !active)
+        if (collision.tag == "Player")
         {
             interact_text_control.instance.text_down();
             can_use = false;

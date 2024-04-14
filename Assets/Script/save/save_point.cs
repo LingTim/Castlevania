@@ -28,6 +28,11 @@ public class save_point : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        interact_text_control.instance.text_down();
+    }
+
     private void save()
     {
         SD.reborn_point = new Vector3(transform.position.x, transform.position.y - 3.235f, transform.position.z);

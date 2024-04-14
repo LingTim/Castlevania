@@ -369,6 +369,7 @@ public class ona_move : MonoBehaviour
     public void be_damaged()
     {
         life -= 10;
+        bloodUI_control.instance.ona_bloodUI_change(life);
         if (life > 0)
         {
             StartCoroutine(damage_effect());
@@ -382,6 +383,7 @@ public class ona_move : MonoBehaviour
             StopAllCoroutines();
             col.enabled = false;
             door.SetActive(false);
+            GameObject.Find("BGM").GetComponent<AudioSource>().Stop();
         }
     }
 

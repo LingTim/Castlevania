@@ -15,10 +15,12 @@ public class bloodUI_control : MonoBehaviour
     private bool is_play = false;
 
     private Image blood;
+    private Image ona_blood;
     private Image head;
     private Image prologue;
 
     public Sprite[] blood_image;
+    public Sprite[] ona_blood_image;
     public Sprite[] head_image;
     public Sprite[] prologue_image;
 
@@ -29,6 +31,7 @@ public class bloodUI_control : MonoBehaviour
         if(instance == null)
             instance = this;
         blood = GameObject.Find("血條").GetComponent<Image>();
+        ona_blood = GameObject.Find("歐娜血條").GetComponent<Image>();
         head = GameObject.Find("腳色頭像").GetComponent<Image>();
         prologue = GameObject.Find("序章標題動畫").GetComponent<Image>();
     }
@@ -49,6 +52,13 @@ public class bloodUI_control : MonoBehaviour
         if (num < 0)
             return;
         blood.sprite = blood_image[num / 10];
+    }
+
+    public void ona_bloodUI_change(int num)
+    {
+        if (num < 0)
+            return;
+        ona_blood.sprite = ona_blood_image[num / 10];
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
