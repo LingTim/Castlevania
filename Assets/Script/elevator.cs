@@ -28,7 +28,7 @@ public class elevator : MonoBehaviour
         {
             can_use = true;
             teleport_obj = collision.gameObject;
-            interact_text_control.instance.text_on("按下F開啟電梯");
+            interact_text_control.instance.text_on("按下F進入");
         }
     }
 

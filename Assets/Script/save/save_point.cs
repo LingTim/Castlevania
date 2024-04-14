@@ -22,6 +22,9 @@ public class save_point : MonoBehaviour
             ani.enabled = true;
             ani.SetBool("Ä²¸I¼Æ­È", true);
             save();
+            collision.GetComponent<character_move>().life = 70;
+            bloodUI_control.instance.bloodUI_change(collision.GetComponent<character_move>().life);
+            interact_text_control.instance.text_on("¤w¦sÀÉ");
         }
     }
 
